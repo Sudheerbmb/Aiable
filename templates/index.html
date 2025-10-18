@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loveable - AI Project Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    <i class="fas fa-heart"></i>
+                    Loveable
+                </h1>
+                <p class="tagline">AI-Powered Project Generator</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-card">
+                    <h2>Describe Your Project</h2>
+                    <p class="input-description">Tell us what you want to build and we'll generate the complete code for you!</p>
+                    
+                    <form id="project-form" class="project-form">
+                        <div class="form-group">
+                            <label for="prompt">Project Description</label>
+                            <textarea 
+                                id="prompt" 
+                                name="prompt" 
+                                placeholder="e.g., Build a modern todo app with dark mode, drag-and-drop functionality, and local storage..."
+                                rows="4"
+                                required
+                            ></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="recursion-limit">Recursion Limit (Advanced)</label>
+                            <input 
+                                type="number" 
+                                id="recursion-limit" 
+                                name="recursion-limit" 
+                                value="100" 
+                                min="10" 
+                                max="500"
+                            >
+                            <small>Higher values allow for more complex projects but may take longer</small>
+                        </div>
+                        
+                        <button type="submit" class="generate-btn" id="generate-btn">
+                            <i class="fas fa-magic"></i>
+                            Generate Project
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Status Section -->
+            <section class="status-section" id="status-section" style="display: none;">
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>Generation Status</h3>
+                        <div class="status-indicator" id="status-indicator">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                    <div class="status-content">
+                        <p id="status-message">Initializing...</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section" style="display: none;">
+                <div class="results-header">
+                    <h3 id="project-title">Generated Project</h3>
+                    <div class="results-actions">
+                        <button class="action-btn download-all-btn" id="download-all-btn">
+                            <i class="fas fa-download"></i>
+                            Download All
+                        </button>
+                        <button class="action-btn refresh-btn" id="refresh-btn">
+                            <i class="fas fa-refresh"></i>
+                            New Project
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="files-container">
+                    <div class="files-header">
+                        <h4>Generated Files</h4>
+                        <div class="file-count" id="file-count">0 files</div>
+                    </div>
+                    <div class="files-list" id="files-list">
+                        <!-- Files will be populated here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- File Viewer Modal -->
+        <div class="modal" id="file-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">File Content</h3>
+                    <button class="modal-close" id="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="file-actions">
+                        <button class="action-btn download-file-btn" id="download-file-btn">
+                            <i class="fas fa-download"></i>
+                            Download
+                        </button>
+                    </div>
+                    <pre class="file-content"><code id="file-content"></code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div class="modal" id="error-modal">
+            <div class="modal-content error-modal">
+                <div class="modal-header">
+                    <h3>Error</h3>
+                    <button class="modal-close" id="error-modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="error-message"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
